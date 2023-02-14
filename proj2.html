@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starwars Project</title>
+    <style>
+        *{
+            
+           
+        margin-left: auto;
+        margin-right: auto;
+        }
+    .characters {
+        width:70%;
+        margin-top: 40px;
+       
+        padding: 20px;
+        background-color: whitesmoke;
+        display: block;
+        border: 3px solid black;
+        box-shadow: 10px 10px 5px black;
+        font-family:Arial, Helvetica, sans-serif;
+        color: #36454F;
+        
+    }
+    div:hover{
+        opacity: 0.8;
+        color: black;
+        
+    }
+    button,img,.name{
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+       
+        
+    }
+    
+</style>
+</head>
+<body>
+    <h1>StarWars</h1>
+    <button type="submit">Generate Character</button>
+
+    <h2 class="name"></h2>
+    <img title="" src="" alt="Image not found" height="200px" width="200px">
+    <div class="characters"></div>
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            let rand=1;
+            $.get(`https://akabab.github.io/starwars-api/api/id/${rand}.json`,(data)=>{
+                $(".name").html(`<h3>${data["name"]}</h3>`);
+                    $("img").attr("src",data['image']).attr("title",`${data["name"]}`)
+                for (index in data)
+                        $("div").append(`<p>${index}:${data[index]}</p>`)
+            });  
+            
+            $("button").on("click",function(){
+                 rand=Math.floor(Math.random()*83);
+                 $("div").text("");
+                 $.get(`https://akabab.github.io/starwars-api/api/id/${rand}.json`,(data)=>{
+                    $(".name").html(`<h3>${data["name"]}</h3>`);
+                    $("img").attr("src",data['image']).attr("title",`${data["name"]}`)
+                for (index in data)
+                        $("div").append(`<p>${index}:${data[index]}</p>`)
+               
+                
+            });  
+            })
+        
+    }) 
+    
+    </script>
+</body>
+</html>
